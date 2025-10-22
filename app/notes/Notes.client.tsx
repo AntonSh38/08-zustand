@@ -15,8 +15,8 @@ import Pagination from '@/components/Pagination/Pagination';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import NoteList from '@/components/NoteList/NoteList';
-import Loader from '@/components/Loader/Loader';
-import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
+import Loader from '@/app/loading';
+import ErrorMessage from '@/app/error';
 
 interface Props {
   dehydrate: DehydratedState;

@@ -2,7 +2,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import css from './NoteList.module.css';
-import { Note } from '@/types/types';
+import { Note } from '@/types/note';
 import { deleteNote } from '@/lib/api';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
