@@ -8,7 +8,7 @@ import { Note } from '@/types/note';
 
 export default function NoteDetailsClient() {
   const params = useParams();
-  const id = params?.id as string;
+  const id = params.id as string;
 
   const {
     data: note,
@@ -17,7 +17,10 @@ export default function NoteDetailsClient() {
   } = useQuery<Note>({
     queryKey: ['note', id],
     queryFn: () => fetchNoteById(id),
+    enabled: !!id,
     refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   if (isLoading) {

@@ -38,6 +38,9 @@ export default function NoteClient({ initialPage }: Props) {
         search: debounceedSearch,
       }),
     placeholderData: keepPreviousData,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   const handleSearchChange = (value: string): void => {
