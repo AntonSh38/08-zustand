@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className={css.footer}>
       <div className={css.content}>
-        <p>© {new Date().getFullYear()} NoteHub. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} NoteHub. All rights reserved.</p>
         <div className={css.wrap}>
           <p>Developer: your name</p>
           <p>
