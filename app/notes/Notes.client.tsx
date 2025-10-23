@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  DehydratedState,
-  keepPreviousData,
-  useQuery,
-} from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 import { fetchNotes } from '@/lib/api';
 import { Toaster } from 'react-hot-toast';
@@ -19,7 +15,6 @@ import Loader from '@/app/loading';
 import ErrorMessage from '@/app/error';
 
 interface Props {
-  dehydrate: DehydratedState;
   initialPage: number;
 }
 
@@ -29,7 +24,7 @@ export default function NoteClient({ initialPage }: Props) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [debounceedSearch] = useDebounce(searchQuery, 500);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['notes', page, debounceedSearch],
     queryFn: () =>
       fetchNotes({
@@ -39,8 +34,6 @@ export default function NoteClient({ initialPage }: Props) {
       }),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    retry: 1,
   });
 
   const handleSearchChange = (value: string): void => {
@@ -94,7 +87,7 @@ export default function NoteClient({ initialPage }: Props) {
         </header>
 
         {isLoading && <Loader />}
-        {isError && <ErrorMessage />}
+        {isError && error && <ErrorMessage error={error} />}
 
         {!isLoading && !isError && notes.length > 0 && (
           <NoteList notes={notes} />
