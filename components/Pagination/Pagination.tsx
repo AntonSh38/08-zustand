@@ -15,7 +15,7 @@ export default function Pagination({
   if (totalPages <= 0) {
     return null;
   }
-
+  
   const handlePageClick = (event: { selected: number }) => {
     onPageChange(event.selected + 1);
   };

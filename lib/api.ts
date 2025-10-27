@@ -7,6 +7,7 @@ const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
+  page?: number;
 }
 
 export interface CreateNoteData {
@@ -19,12 +20,14 @@ export interface FetchNotesParams {
   page?: number;
   perPage?: number;
   search?: string;
+  tag?: string;
 }
 
 export async function fetchNotes({
   page = 1,
   perPage = 12,
   search = '',
+  tag,
 }: FetchNotesParams): Promise<FetchNotesResponse> {
   if (!TOKEN) {
     throw new Error('NoteHub token is not configured');
@@ -35,6 +38,7 @@ export async function fetchNotes({
       page,
       perPage,
       ...(search && { search }),
+      tag,
     },
     headers: {
       Authorization: `Bearer ${TOKEN}`,
