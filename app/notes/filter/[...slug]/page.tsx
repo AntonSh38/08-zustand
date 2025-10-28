@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         category === 'all'
           ? 'Browse all notes available in NoteHub.'
           : `View notes catigorized under the ${category} tag`,
-      url: `https://08-zustand-gt8gtx584-antonsh38s-projects.vercel.app/notes/filter/${category}`,
+      url: `https://08-zustand-six-blue.vercel.app/notes/filter/${category}`,
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
