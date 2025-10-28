@@ -8,7 +8,7 @@ import {
 import FilteredNotesClient from './Notes.client';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export default async function FilteredNotesPage({ params }: Props) {
