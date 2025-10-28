@@ -6,16 +6,46 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import FilteredNotesClient from './Notes.client';
+import { Metadata } from 'next';
 
 interface Props {
   params: Promise<{ slug: string[] }>;
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const category = slug[0];
+  return {
+    title: category === 'all' ? 'All Notes' : `Notes ${category}`,
+    description:
+      category === 'all'
+        ? 'Browse all notes available in NoteHub.'
+        : `View notes catigorized under the ${category} tag`,
+    openGraph: {
+      title: category === 'all' ? 'All Notes' : `Notes ${category}`,
+      description:
+        category === 'all'
+          ? 'Browse all notes available in NoteHub.'
+          : `View notes catigorized under the ${category} tag`,
+      url: `https://08-zustand-gt8gtx584-antonsh38s-projects.vercel.app/notes/filter/${category}`,
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: `Note ${category}`,
+        },
+      ],
+    },
+  };
+}
+
 export default async function FilteredNotesPage({ params }: Props) {
-  const { slug: category } = await params;
+  const { slug } = await params;
+  const category = slug[0];
 
   const tag: NoteTag | undefined =
-    category[0] && category[0] !== 'all' ? (category[0] as NoteTag) : undefined;
+    category && category !== 'all' ? (category as NoteTag) : undefined;
 
   const queryClient = new QueryClient();
 

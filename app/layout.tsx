@@ -1,8 +1,23 @@
 import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import './globals.css';
+
+const roboto = Roboto({
+  weight: ['400', '600', '700'],
+  variable: '--font-roboto',
+  display: 'swap',
+  subsets: ['latin'],
+});
+
+// const roboto = Roboto({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+//   variable: '--font-roboto',
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   title: 'NoteHub App',
@@ -12,7 +27,7 @@ export const metadata: Metadata = {
     title: 'NoteHub App',
     description:
       'NoteHub is a fast and modern note-taking web app. Create, edit, and filter notes by tags, organize your ideas, and preview details instantly without page reloads',
-    url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+    url: 'https://08-zustand-gt8gtx584-antonsh38s-projects.vercel.app/',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -33,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${roboto.variable}`}>
         <TanStackProvider>
           <Header />
           {children}
