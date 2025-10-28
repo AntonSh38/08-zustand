@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  min-height: calc(100vh - 200px);
+  height: 100vh;
 }
 
 .sidebar {
@@ -16,7 +16,5 @@
 }
 
 .notesWrapper {
-  flex: 1;
-  overflow-y: auto;
-  max-height: calc(100vh - 200px);
+  width: 100%;
 }

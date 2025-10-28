@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
-import css from '../../Notes.module.css';
+import css from '../../../../components/NotesPage/NotesPage.module.css';
 import { Toaster } from 'react-hot-toast';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
