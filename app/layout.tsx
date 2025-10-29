@@ -12,22 +12,16 @@ const roboto = Roboto({
   subsets: ['latin'],
 });
 
-// const roboto = Roboto({
-//   subsets: ['latin'],
-//   weight: ['400', '700'],
-//   variable: '--font-roboto',
-//   display: 'swap',
-// });
-
 export const metadata: Metadata = {
-  title: 'NoteHub App',
+  title: 'NoteHub - Fast and Modern Note-Taking App',
   description:
-    'NoteHub is a fast and modern note-taking web app. Create, edit, and filter notes by tags, organize your ideas, and preview details instantly without page reloads',
+    'NoteHub is a fast, modern, and user-friendly note-taking app. Create, edit, search, and organize your notes with tags and categories - all instantly and seamlessly.',
   openGraph: {
-    title: 'NoteHub App',
+    title: 'NoteHub - Fast and Modern Note-Taking App',
     description:
-      'NoteHub is a fast and modern note-taking web app. Create, edit, and filter notes by tags, organize your ideas, and preview details instantly without page reloads',
+      'Create, organize, and search your notes effortlessly with NoteHub. A modern web app for efficient note management.',
     url: 'https://08-zustand-six-blue.vercel.app/',
+    siteName: 'NoteHub',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -36,6 +30,15 @@ export const metadata: Metadata = {
         alt: 'note title',
       },
     ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NoteHub - Fast and Modern Note-Taking App',
+    description:
+      'Create, organize, and search your notes effortlessly with NoteHub - a modern, fast note-taking experience.',
+    images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
   },
 };
 

@@ -14,28 +14,39 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const category = slug[0];
+  const category = slug[0] || 'all';
+
+  const title =
+    category === 'all'
+      ? 'All Notes - NoteHub'
+      : `Notes tagged with ${category} - NoteHub`;
+
+  const description =
+    category === 'all'
+      ? 'Browse and search all notes on NoteHub, your fast and modern note-taking platform.'
+      : `View all notes categorized under the ${category} tag on NoteHub. Organize and manage your ideas efficiently.`;
+
   return {
-    title: category === 'all' ? 'All Notes' : `Notes ${category}`,
-    description:
-      category === 'all'
-        ? 'Browse all notes available in NoteHub.'
-        : `View notes catigorized under the ${category} tag`,
+    title,
+    description,
     openGraph: {
-      title: category === 'all' ? 'All Notes' : `Notes ${category}`,
-      description:
-        category === 'all'
-          ? 'Browse all notes available in NoteHub.'
-          : `View notes catigorized under the ${category} tag`,
+      title,
+      description,
       url: `https://08-zustand-six-blue.vercel.app/notes/filter/${category}`,
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
           width: 1200,
           height: 630,
-          alt: `Note ${category}`,
+          alt: `Notes tagged with ${category}`,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
     },
   };
 }

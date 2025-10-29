@@ -15,25 +15,44 @@ export async function generateMetadata({
   params,
 }: NoteDetailsPageProps): Promise<Metadata> {
   const { id } = await params;
-  const note = await fetchNoteById(id);
 
-  return {
-    title: `NoteHub ${note.title}`,
-    description: `NoteHub description ${note.content}`,
-    openGraph: {
-      title: `NoteHub ${note.title}`,
-      description: `NoteHub description ${note.content}`,
-      url: `https://08-zustand-six-blue.vercel.app/notes/${note.id}`,
-      images: [
-        {
-          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-          width: 1200,
-          height: 630,
-          alt: `Note ${note.title}`,
-        },
-      ],
-    },
-  };
+  try {
+    const note = await fetchNoteById(id);
+
+    const title = `${note.title} - NoteHub`;
+    const description =
+      note.content?.slice(0, 150) ||
+      'View note details on NoteHub - your personal note management platform.';
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        url: `https://08-zustand-six-blue.vercel.app/notes/${note.id}`,
+        images: [
+          {
+            url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+            width: 1200,
+            height: 630,
+            alt: `Note titled ${note.title}`,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+      },
+    };
+  } catch {
+    return {
+      title: 'Note not found - NoteHub',
+      description: 'This note could not be found on NoteHub',
+    };
+  }
 }
 
 export default async function NoteDetailsPage({

@@ -6,6 +6,7 @@ import { Note } from '@/types/note';
 import { useQuery } from '@tanstack/react-query';
 import css from '../../../../components/NotePreview/NotePreview.module.css';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface Props {
   noteId: string;
@@ -19,6 +20,17 @@ export default function NotePreview({ noteId }: Props) {
     queryFn: () => fetchNoteById(noteId),
     refetchOnMount: false,
   });
+
+  useEffect(() => {
+    if (!note?.title) return;
+
+    const previousTitle = document.title;
+    document.title = `${note.title} - NoteHub`;
+
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [note?.title]);
 
   const handleClose = () => {
     router.back();
