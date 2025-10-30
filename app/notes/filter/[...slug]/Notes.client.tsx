@@ -9,7 +9,6 @@ import NoteList from '@/components/NoteList/NoteList';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import css from '../../../../components/NotesPage/NotesPage.module.css';
-import { Toaster } from 'react-hot-toast';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import Link from 'next/link';
@@ -21,15 +20,15 @@ interface Props {
 export default function FilteredNotesClient({ tag }: Props) {
   const [page, setPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [debounceedSearch] = useDebounce(searchQuery, 500);
+  const [debouncedSearch] = useDebounce(searchQuery, 500);
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['notes', page, debounceedSearch, tag],
+    queryKey: ['notes', page, debouncedSearch, tag],
     queryFn: () =>
       fetchNotes({
         page: page,
         perPage: 12,
-        search: debounceedSearch,
+        search: debouncedSearch,
         tag: tag === 'all' ? undefined : tag,
       }),
     placeholderData: keepPreviousData,
@@ -58,8 +57,6 @@ export default function FilteredNotesClient({ tag }: Props) {
 
   return (
     <div className={css.app}>
-      <Toaster position="top-center" />
-
       <header className={css.toolbar}>
         <SearchBox value={searchQuery} onChange={handleSearchChange} />
 
@@ -76,12 +73,9 @@ export default function FilteredNotesClient({ tag }: Props) {
         </Link>
       </header>
 
-      {isLoading && <Loader />}
-      {isError && error && <ErrorMessage error={error} />}
-
-      {!isLoading && !isError && notes.length > 0 && <NoteList notes={notes} />}
-
-      {!isLoading && !isError && notes.length === 0 && (
+      {notes.length > 0 ? (
+        <NoteList notes={notes} />
+      ) : (
         <p className={css.emptyMessage}>
           {searchQuery ? 'No notes found for your search' : null}
         </p>
